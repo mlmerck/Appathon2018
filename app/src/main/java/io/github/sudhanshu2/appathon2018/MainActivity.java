@@ -76,8 +76,6 @@ public class MainActivity extends Activity implements
         captions.put(KWS_SEARCH, R.string.kws_caption);
         captions.put(MENU_SEARCH, R.string.menu_caption);
         setContentView(R.layout.main);
-        ((TextView) findViewById(R.id.caption_text))
-                .setText("Preparing the recognizer");
 
         int permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.RECORD_AUDIO);
         if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
@@ -106,8 +104,7 @@ public class MainActivity extends Activity implements
         @Override
         protected void onPostExecute(Exception result) {
             if (result != null) {
-                ((TextView) activityReference.get().findViewById(R.id.caption_text))
-                        .setText("Failed to init recognizer " + result);
+                Log.wtf(TAG, "Failed to init recognizer " + result);
             } else {
                 activityReference.get().switchSearch(KWS_SEARCH);
             }
@@ -147,7 +144,7 @@ public class MainActivity extends Activity implements
         String text = hypothesis.getHypstr();
         Log.wtf(TAG, text);
         if (text.equalsIgnoreCase(KEYPHRASE)) {
-            Log.wtf(TAG, "EQUALS");
+            Log.wtf(TAG, "Match...");
             AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
             am.setStreamMute(AudioManager.STREAM_MUSIC, true);
             onDestroy();
