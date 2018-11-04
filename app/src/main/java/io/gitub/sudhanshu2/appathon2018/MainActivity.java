@@ -41,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 //              Activate the application stuff
                 powerButton.setSelected(!powerButton.isSelected());
+                if(powerButton.isSelected()) {
+                    // what to do when the power button is checked
+                } else {
+                    // what happens when the power button is not checked
+                }
             }
         });
 
