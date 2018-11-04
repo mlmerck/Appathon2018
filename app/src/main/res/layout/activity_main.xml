@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:paddingRight="30dp"
+    android:paddingLeft="30dp"
+    tools:context=".MainActivity"
+    android:fontFamily="@font/raleway_light"
+    android:background="@drawable/firewatchrednavybg">
+
+    <ScrollView
+        android:id="@+id/start_on_connection"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/raleway_light"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <Button
+                android:id="@+id/power_button"
+                android:layout_width="250dp"
+                android:layout_height="280dp"
+                android:background="@drawable/power_button" />
+
+            <EditText
+                android:id="@+id/text_input"
+                android:layout_width="fill_parent"
+                android:layout_height="70dp"
+                android:textSize="30sp"
+                android:backgroundTint="@android:color/white"
+                android:textColor="@android:color/white"
+                android:fontFamily="@font/raleway_light"
+                android:text="Words to listen for" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:fontFamily="@font/raleway_light"
+                android:gravity="center"
+                android:text="Response Options"
+                android:textSize="30sp"
+                android:textColor="@android:color/white"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:fontFamily="@font/raleway_light"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="start"
+                    android:text="Start With Aux"
+                    android:textSize="30sp"
+                    android:textColor="@android:color/white"/>
+
+                <Switch
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_gravity="end"
+                    android:gravity="center_vertical"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:fontFamily="@font/raleway_light"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="start"
+                    android:text="Stop Music"
+                    android:textSize="30sp"
+                    android:textColor="@android:color/white"/>
+                <Switch
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_gravity="end"
+                    android:gravity="center_vertical" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:fontFamily="@font/raleway_light"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="start"
+                    android:text="Lower Volume"
+                    android:textSize="30sp"
+                    android:textColor="@android:color/white"/>
+                <Switch
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_gravity="end"
+                    android:gravity="center_vertical" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:layout_gravity="start"
+                    android:fontFamily="@font/raleway_light"
+                    android:gravity="center_vertical"
+                    android:text="Play Tone"
+                    android:textColor="@android:color/white"
+                    android:textSize="30sp" />
+                <Switch
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_gravity="end"
+                    android:gravity="center_vertical" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:fontFamily="@font/raleway_light"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="start"
+                    android:text="Response Options"
+                    android:textSize="30sp"
+                    android:textColor="@android:color/white"/>
+                <Switch
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_gravity="end"
+                    android:gravity="center_vertical" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/buttonstop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Stop"
+                android:visibility="visible" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
