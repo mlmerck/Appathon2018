@@ -4,4 +4,4 @@ Uses Carnegie Mellon University's PocketSphinx for background voice recognition.
 
 <hr>
 
-Available under MIT License.
+Available under <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>
