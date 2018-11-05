@@ -36,7 +36,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
-import android.media.ToneGenerator;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -45,7 +44,8 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.ToggleButton;
 
 import java.io.File;
@@ -60,19 +60,21 @@ import edu.cmu.pocketsphinx.SpeechRecognizer;
 import edu.cmu.pocketsphinx.SpeechRecognizerSetup;
 
 public class MainActivity extends Activity implements
-        RecognitionListener, View.OnClickListener {
+        RecognitionListener {
 
     private Button start, stop;
 
-    private boolean quiteIt =  false;
+    private boolean quiteIt =  true;
 
     private static final String KWS_SEARCH = "wakeup";
     private static final String MENU_SEARCH = "menu";
 
-    private static final String KEYPHRASE = "hi computer";
+    private static final String KEYPHRASE = "hi matthew";
     private static final String TAG = "MainActivity";
 
     private static final int PERMISSIONS_REQUEST_RECORD_AUDIO = 1;
+
+    private static int decrement;
 
     private SpeechRecognizer recognizer;
     private HashMap<String, Integer> captions;
@@ -88,12 +90,17 @@ public class MainActivity extends Activity implements
         captions.put(MENU_SEARCH, R.string.menu_caption);
         setContentView(R.layout.activity_main);
 
-
-        start = (Button) findViewById(R.id.power_button);
-        stop = (Button) findViewById(R.id.buttonstop);
-
-        start.setOnClickListener(this);
-        stop.setOnClickListener(this);
+        final Button powerButton = findViewById(R.id.power_button);
+        powerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startService(new Intent(MainActivity.super.getApplicationContext(), AuxConnService.class));
+                powerButton.setSelected(!powerButton.isSelected());
+                while (!powerButton.isSelected()) {
+                    Log.wtf(TAG, "Power button not selected.");
+                }
+            }
+        });
 
         int permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.RECORD_AUDIO);
         if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
@@ -101,6 +108,23 @@ public class MainActivity extends Activity implements
             return;
         }
         new SetupTask(this).execute();
+    }
+
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.radio_pirates:
+                if (checked)
+                    decrement = 10;
+                    break;
+            case R.id.radio_ninjas:
+                if (checked)
+                    decrement = 4;
+                    break;
+        }
     }
 
     private static class SetupTask extends AsyncTask<Void, Void, Exception> {
@@ -169,7 +193,7 @@ public class MainActivity extends Activity implements
 
                 am.setStreamVolume(
                         AudioManager.STREAM_MUSIC,
-                        am.getStreamVolume(AudioManager.STREAM_MUSIC) - 2, 0);
+                        am.getStreamVolume(AudioManager.STREAM_MUSIC) - decrement, 0);
             } else {
                 AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                 am.setStreamMute(AudioManager.STREAM_MUSIC, true);
@@ -178,7 +202,7 @@ public class MainActivity extends Activity implements
             Bundle anotherState = new Bundle();
             onCreate(anotherState);
             this.onDestroy();
-        } else {
+        } else{
             Log.wtf(TAG, text);
         }
     }
@@ -232,16 +256,5 @@ public class MainActivity extends Activity implements
     @Override
     public void onTimeout() {
         switchSearch(KWS_SEARCH);
-    }
-
-    @Override
-    public void onClick(View v) {
-
-        if (v == start) {
-            startService(new Intent(this, AuxConnService.class));
-        } else if (v == stop) {
-            stopService(new Intent(this, AuxConnService.class));
-
-        }
     }
 }
